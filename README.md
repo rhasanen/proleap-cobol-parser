@@ -201,6 +201,24 @@ Release process
 * Milestones of the grammar are published in the [ANTLR grammars repo](https://github.com/antlr/grammars-v4).
 
 
+Python port bootstrap
+---------------------
+
+An initial Python port bootstrap now exists under `src/proleap_cobol_parser` with:
+
+* parser runner API skeleton (`proleap_cobol_parser.parser.runner`)
+* preprocessor pipeline subset (`line reader`, `line indicator processing`, `inline comment normalization`, `comment entry marking`, `line writer`)
+* packaging metadata in `pyproject.toml`
+* starter tests in `tests/`
+
+To run Python tests:
+
+```
+$ python -m pip install -e ".[dev]"
+$ pytest
+```
+
+
 License
 -------
 

@@ -1,0 +1,10 @@
+from enum import Enum
+
+
+class CobolLineType(Enum):
+    BLANK = "BLANK"
+    COMMENT = "COMMENT"
+    COMPILER_DIRECTIVE = "COMPILER_DIRECTIVE"
+    CONTINUATION = "CONTINUATION"
+    DEBUG = "DEBUG"
+    NORMAL = "NORMAL"
