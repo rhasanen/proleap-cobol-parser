@@ -1,7 +1,7 @@
 from dataclasses import dataclass, field
 from enum import Enum
-from pathlib import Path
 import re
+from pathlib import Path
 
 
 _INDICATOR_FIELD = r"([ABCdD$\t\-/*# ])"
