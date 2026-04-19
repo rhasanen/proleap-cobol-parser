@@ -47,9 +47,10 @@ class CobolAstFixtureMatrixRunner:
         )
 
     def is_parser_available(self) -> bool:
-        is_available = getattr(self._parser_engine, "is_available", None)
-        if callable(is_available):
-            return bool(is_available())
+        if hasattr(self._parser_engine, "is_available"):
+            is_available = getattr(self._parser_engine, "is_available")
+            if callable(is_available):
+                return bool(is_available())
         return True
 
     def discover_cases(

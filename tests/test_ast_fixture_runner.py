@@ -21,7 +21,7 @@ def test_fixture_runner_compares_normalized_tree_output(tmp_path: Path) -> None:
         def toStringTree(self, recognizer=None, recog=None):  # noqa: ARG002, N802
             return "(startRule\\n (x ) )"
 
-    class FakeEngine:
+    class StubParserEngine:
         def parse(self, preprocessed_code: str, ignore_syntax_errors: bool) -> CobolParseResult:
             return CobolParseResult(parse_tree=FakeTree(), syntax_errors=0, parser=object())
 
@@ -30,7 +30,7 @@ def test_fixture_runner_compares_normalized_tree_output(tmp_path: Path) -> None:
     cobol_file.write_text("000100 IDENTIFICATION DIVISION.", encoding="utf-8")
     tree_file.write_text("(startRule (x))", encoding="utf-8")
 
-    runner = CobolAstFixtureRunner(parser_engine=FakeEngine())  # type: ignore[arg-type]
+    runner = CobolAstFixtureRunner(parser_engine=StubParserEngine())  # type: ignore[arg-type]
     params = CobolParserParams(format=CobolSourceFormat.FIXED)
     comparison = runner.compare_file(cobol_file, params, tree_file=tree_file)
 

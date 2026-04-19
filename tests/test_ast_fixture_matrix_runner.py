@@ -51,11 +51,11 @@ def test_matrix_runner_run_aggregates_match_counts(tmp_path: Path) -> None:
     _create_fixture_case(tmp_path, "fixed", "Match")
     _create_fixture_case(tmp_path, "fixed", "Mismatch")
 
-    class DummyEngine:
+    class StubParserEngine:
         def is_available(self) -> bool:
             return True
 
-    class DummyFixtureRunner:
+    class StubFixtureRunner:
         def compare_file(self, cobol_file: Path, params: CobolParserParams, tree_file: Path) -> CobolAstFixtureComparison:
             matched = "Mismatch" not in cobol_file.name
             return CobolAstFixtureComparison(
@@ -66,8 +66,8 @@ def test_matrix_runner_run_aggregates_match_counts(tmp_path: Path) -> None:
             )
 
     runner = CobolAstFixtureMatrixRunner(
-        parser_engine=DummyEngine(),  # type: ignore[arg-type]
-        fixture_runner=DummyFixtureRunner(),  # type: ignore[arg-type]
+        parser_engine=StubParserEngine(),  # type: ignore[arg-type]
+        fixture_runner=StubFixtureRunner(),  # type: ignore[arg-type]
         ast_fixture_root=tmp_path,
     )
     result = runner.run()
@@ -80,15 +80,14 @@ def test_matrix_runner_run_aggregates_match_counts(tmp_path: Path) -> None:
 def test_matrix_runner_run_raises_when_parser_not_available(tmp_path: Path) -> None:
     _create_fixture_case(tmp_path, "fixed", "Alpha")
 
-    class UnavailableEngine:
+    class StubUnavailableParserEngine:
         def is_available(self) -> bool:
             return False
 
     runner = CobolAstFixtureMatrixRunner(
-        parser_engine=UnavailableEngine(),  # type: ignore[arg-type]
+        parser_engine=StubUnavailableParserEngine(),  # type: ignore[arg-type]
         ast_fixture_root=tmp_path,
     )
 
     with pytest.raises(ParserNotGeneratedError):
         runner.run()
-
