@@ -23,9 +23,33 @@ class CobolLineIndicatorProcessor:
         return self._repair_trailing_comma(self._trim_trailing_ws(value))
 
     def _remove_string_literals(self, value: str) -> str:
-        value = re.sub(r'"([^"]|""|\'\')*"', self._empty, value)
-        value = re.sub(r"'([^']|''|\"\")*'", self._empty, value)
-        return value
+        result: list[str] = []
+        i = 0
+        quote_char: str | None = None
+
+        while i < len(value):
+            ch = value[i]
+
+            if quote_char is None:
+                if ch in {"'", '"'}:
+                    quote_char = ch
+                    i += 1
+                    continue
+                result.append(ch)
+                i += 1
+                continue
+
+            if ch == quote_char:
+                if i + 1 < len(value) and value[i + 1] == quote_char:
+                    i += 2
+                    continue
+                quote_char = None
+                i += 1
+                continue
+
+            i += 1
+
+        return "".join(result)
 
     def _is_ending_with_open_literal(self, line: CobolLine) -> bool:
         no_literals = self._remove_string_literals(line.content_area_original)
