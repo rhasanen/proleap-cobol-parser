@@ -18,7 +18,7 @@ def test_fixture_runner_raises_without_generated_parser_modules() -> None:
 
 def test_fixture_runner_compares_normalized_tree_output(tmp_path: Path) -> None:
     class FakeTree:
-        def toStringTree(self, recog):  # noqa: N802
+        def toStringTree(self, recognizer=None, recog=None):  # noqa: ARG002, N802
             return "(startRule\\n (x ) )"
 
     class FakeEngine:
