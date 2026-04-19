@@ -233,6 +233,7 @@ AST fixture parity utilities:
 
 * `proleap_cobol_parser.testing.normalize_tree` (tree-string normalization compatible with Java test cleanup)
 * `proleap_cobol_parser.testing.CobolAstFixtureRunner` (`.cbl` + `.tree` fixture comparison)
+* `proleap_cobol_parser.testing.CobolAstFixtureMatrixRunner` (configurable real-fixture matrix runner with parser-availability gating)
 
 
 License
