@@ -1,7 +1,7 @@
 from __future__ import annotations
 
-from pathlib import Path
 import re
+from pathlib import Path
 
 
 def normalize_tree(tree: str) -> str:
@@ -15,4 +15,3 @@ def normalize_tree(tree: str) -> str:
 def compare_tree_with_file(actual_tree: str, expected_tree_file: Path, charset: str = "utf-8") -> bool:
     expected_tree = expected_tree_file.read_text(encoding=charset)
     return normalize_tree(actual_tree) == normalize_tree(expected_tree)
-

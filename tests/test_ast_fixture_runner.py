@@ -10,9 +10,8 @@ from proleap_cobol_parser.testing.ast_fixture_runner import CobolAstFixtureRunne
 def test_fixture_runner_raises_without_generated_parser_modules() -> None:
     runner = CobolAstFixtureRunner()
     params = CobolParserParams(format=CobolSourceFormat.FIXED)
-    cobol_file = Path(
-        "/home/runner/work/proleap-cobol-parser/proleap-cobol-parser/src/test/resources/io/proleap/cobol/ast/HelloWorld.cbl"
-    )
+    repo_root = Path(__file__).resolve().parents[1]
+    cobol_file = repo_root / "src/test/resources/io/proleap/cobol/ast/HelloWorld.cbl"
     with pytest.raises(ParserNotGeneratedError):
         runner.compare_file(cobol_file, params)
 
@@ -36,4 +35,3 @@ def test_fixture_runner_compares_normalized_tree_output(tmp_path: Path) -> None:
     comparison = runner.compare_file(cobol_file, params, tree_file=tree_file)
 
     assert comparison.matched is True
-
