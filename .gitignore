@@ -44,3 +44,5 @@ out/
 
 __pycache__/
 *.pyc
+src/proleap_cobol_parser/parser/generated/*
+!src/proleap_cobol_parser/parser/generated/__init__.py

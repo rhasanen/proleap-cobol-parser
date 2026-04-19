@@ -206,7 +206,7 @@ Python port bootstrap
 
 An initial Python port bootstrap now exists under `src/proleap_cobol_parser` with:
 
-* parser runner API skeleton (`proleap_cobol_parser.parser.runner`)
+* parser runner API with ANTLR engine integration hooks (`proleap_cobol_parser.parser.runner`)
 * preprocessor pipeline subset (`line reader`, `line indicator processing`, `inline comment normalization`, `comment entry marking`, `line writer`)
 * packaging metadata in `pyproject.toml`
 * starter tests in `tests/`
@@ -217,6 +217,16 @@ To run Python tests:
 $ python -m pip install -e ".[dev]"
 $ pytest
 ```
+
+To generate Python ANTLR modules from the repository grammars:
+
+```
+$ python /home/runner/work/proleap-cobol-parser/proleap-cobol-parser/scripts/generate_python_antlr.py
+```
+
+Generated files are written to:
+
+* `src/proleap_cobol_parser/parser/generated`
 
 
 License
