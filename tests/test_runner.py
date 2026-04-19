@@ -34,3 +34,16 @@ def test_runner_uses_parser_engine_when_provided() -> None:
     result = runner.analyze_code("000100 IDENTIFICATION DIVISION.", "Sample", params)
     assert result.parse_tree == {"ok": True}
     assert result.syntax_errors == 0
+
+
+def test_runner_analyze_file_uses_parser_engine_when_provided(tmp_path: Path) -> None:
+    class DummyParserEngine:
+        def parse(self, preprocessed_code: str, ignore_syntax_errors: bool) -> CobolParseResult:
+            return CobolParseResult(parse_tree="tree", syntax_errors=0)
+
+    sample = tmp_path / "hello.cbl"
+    sample.write_text("000100 IDENTIFICATION DIVISION.", encoding="utf-8")
+    runner = CobolParserRunner(parser_engine=DummyParserEngine())  # type: ignore[arg-type]
+    params = CobolParserParams(format=CobolSourceFormat.FIXED)
+    result = runner.analyze_file(sample, params)
+    assert result.parse_tree == "tree"

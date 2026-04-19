@@ -45,13 +45,8 @@ class CobolParserRunner:
         )
 
     def analyze_file(self, cobol_file: Path, params: CobolParserParams) -> CobolAnalysisResult:
-        preprocessed_code = self._preprocessor.process_file(cobol_file, params)
-        return CobolAnalysisResult(
-            compilation_unit_name=cobol_file.stem.capitalize(),
-            preprocessed_code=preprocessed_code,
-            parse_tree=None,
-            asg=None,
-        )
+        cobol_code = cobol_file.read_text(encoding=params.charset)
+        return self.analyze_code(cobol_code, cobol_file.stem.capitalize(), params)
 
     def analyze_file_with_format(
         self, cobol_file: Path, source_format: CobolSourceFormat

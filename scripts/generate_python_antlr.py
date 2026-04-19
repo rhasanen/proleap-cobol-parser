@@ -2,10 +2,10 @@
 
 from __future__ import annotations
 
-from pathlib import Path
 import shutil
 import subprocess
 import urllib.request
+from pathlib import Path
 
 
 ANTLR_VERSION = "4.13.2"
@@ -62,4 +62,3 @@ def main() -> None:
 
 if __name__ == "__main__":
     main()
-
