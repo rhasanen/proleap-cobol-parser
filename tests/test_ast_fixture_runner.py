@@ -18,8 +18,10 @@ def test_fixture_runner_raises_without_generated_parser_modules() -> None:
 
 def test_fixture_runner_compares_normalized_tree_output(tmp_path: Path) -> None:
     class FakeTree:
-        def toStringTree(self, recognizer=None, recog=None):  # noqa: ARG002, N802
+        def to_string_tree(self, recognizer=None, recog=None):  # noqa: ARG002
             return "(startRule\\n (x ) )"
+
+        toStringTree = to_string_tree  # noqa: N815
 
     class StubParserEngine:
         def parse(self, preprocessed_code: str, ignore_syntax_errors: bool) -> CobolParseResult:
