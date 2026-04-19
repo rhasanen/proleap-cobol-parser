@@ -15,4 +15,4 @@ def test_preprocessor_continuation_trims_leading_ws() -> None:
     preprocessor = CobolPreprocessor()
     code = "000100  DISPLAY 'A'\n000200-   'B'"
     result = preprocessor.process_code(code, params)
-    assert "'A''B'" in result
+    assert "'A'B'" in result

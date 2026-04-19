@@ -24,3 +24,6 @@ pythonpath = [
 testpaths = [
   "tests",
 ]
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/proleap_cobol_parser"]
