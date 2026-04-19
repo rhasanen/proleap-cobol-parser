@@ -15,6 +15,7 @@ class ParserNotGeneratedError(RuntimeError):
 class CobolParseResult:
     parse_tree: object
     syntax_errors: int
+    parser: object | None = None
 
 
 class _ThrowingSyntaxErrorListener(ErrorListener):
@@ -64,7 +65,7 @@ class CobolAntlrParserEngine:
             lexer.addErrorListener(counting)
             parser.addErrorListener(counting)
             parse_tree = parser.startRule()
-            return CobolParseResult(parse_tree=parse_tree, syntax_errors=counting.count)
+            return CobolParseResult(parse_tree=parse_tree, syntax_errors=counting.count, parser=parser)
 
         throwing = _ThrowingSyntaxErrorListener()
         lexer.removeErrorListeners()
@@ -72,4 +73,4 @@ class CobolAntlrParserEngine:
         lexer.addErrorListener(throwing)
         parser.addErrorListener(throwing)
         parse_tree = parser.startRule()
-        return CobolParseResult(parse_tree=parse_tree, syntax_errors=0)
+        return CobolParseResult(parse_tree=parse_tree, syntax_errors=0, parser=parser)

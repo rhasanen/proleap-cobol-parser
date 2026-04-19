@@ -207,6 +207,7 @@ Python port bootstrap
 An initial Python port bootstrap now exists under `src/proleap_cobol_parser` with:
 
 * parser runner API with ANTLR engine integration hooks (`proleap_cobol_parser.parser.runner`)
+* AST fixture comparison utilities (`proleap_cobol_parser.testing`)
 * preprocessor pipeline subset (`line reader`, `line indicator processing`, `inline comment normalization`, `comment entry marking`, `line writer`)
 * packaging metadata in `pyproject.toml`
 * starter tests in `tests/`
@@ -227,6 +228,11 @@ $ python scripts/generate_python_antlr.py
 Generated files are written to:
 
 * `src/proleap_cobol_parser/parser/generated`
+
+AST fixture parity utilities:
+
+* `proleap_cobol_parser.testing.normalize_tree` (tree-string normalization compatible with Java test cleanup)
+* `proleap_cobol_parser.testing.CobolAstFixtureRunner` (`.cbl` + `.tree` fixture comparison)
 
 
 License
