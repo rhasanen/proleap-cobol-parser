@@ -221,7 +221,7 @@ $ pytest
 To generate Python ANTLR modules from the repository grammars:
 
 ```
-$ python /home/runner/work/proleap-cobol-parser/proleap-cobol-parser/scripts/generate_python_antlr.py
+$ python scripts/generate_python_antlr.py
 ```
 
 Generated files are written to:

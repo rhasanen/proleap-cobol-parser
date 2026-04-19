@@ -1,7 +1,7 @@
 from __future__ import annotations
 
-from dataclasses import dataclass
 import importlib
+from dataclasses import dataclass
 
 from antlr4 import CommonTokenStream, InputStream
 from antlr4.error.ErrorListener import ErrorListener
@@ -38,7 +38,7 @@ class CobolAntlrParserEngine:
         except ModuleNotFoundError as exc:
             raise ParserNotGeneratedError(
                 "Generated ANTLR parser modules are missing. Run "
-                "'python /home/runner/work/proleap-cobol-parser/proleap-cobol-parser/scripts/generate_python_antlr.py' "
+                "'python scripts/generate_python_antlr.py' "
                 "from the repository root."
             ) from exc
 
@@ -73,4 +73,3 @@ class CobolAntlrParserEngine:
         parser.addErrorListener(throwing)
         parse_tree = parser.startRule()
         return CobolParseResult(parse_tree=parse_tree, syntax_errors=0)
-
